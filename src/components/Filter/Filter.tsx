@@ -6,7 +6,7 @@ import {useState} from 'react'
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../redux/store";
 import { setFilteredVehiclesByLevel } from "../../redux/slices/shipsDataSlice";
-export default function SelectAutoWidth() {
+export default function Filter() {
   const dispatch = useDispatch();
   const [filterByLevel, setFilterByLevel] = useState("");
   const handleChange = (event: SelectChangeEvent) => {
@@ -26,7 +26,7 @@ export default function SelectAutoWidth() {
   const shipClass = [];
   return (
     <div>
-      <FormControl sx={{ m: 1, minWidth: 80 }}>
+      <FormControl sx={{ m: 1, minWidth: 80, backgroundColor: 'white',borderRadius: '20px', width: '110px'}}>
         <InputLabel id="demo-simple-select-autowidth-label">Уровень</InputLabel>
         <Select
           labelId="demo-simple-select-autowidth-label"

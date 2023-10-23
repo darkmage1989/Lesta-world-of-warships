@@ -3,15 +3,17 @@ import { SHIPS } from "../../apollo/ships";
 import { LinearProgress, Pagination, Stack } from "@mui/material";
 import Ship from "../Ship/Ship";
 import style from "./ShipsList.module.css";
-import SelectAutoWidth from "../Filter/Filter";
 import { useDispatch, useSelector } from "react-redux";
 import { setVehicles } from "../../redux/slices/shipsDataSlice";
 import { RootState } from "../../redux/store";
-import { useState } from "react";
+import { useState } from "react"
+import Filter from "../Filter/Filter";
+
 const ShipsList = () => {
+
   const { data, loading, error } = useQuery(SHIPS);
   const [page, setPage] = useState(1);
-  const [shipPerPage] = useState(10);
+  const [shipPerPage] = useState(9);
   const [currentPage, setCurrentPage] = useState(1);
   const lastPage = currentPage * shipPerPage;
   const firstPage = lastPage - shipPerPage;
@@ -33,19 +35,17 @@ const ShipsList = () => {
   if (error) {
     return <div></div>;
   }
-  // const vehicles: Array<vehicles> = data.vehicles;
   const currentVehicles = vehicles.slice(firstPage, lastPage)
   if (!isFiltered) {
     dispatch(setVehicles(data.vehicles));
   }
   return (
     <div className={style.shipsList__box}>
-      <Stack spacing={2}>
-      <Pagination count={vehicles.length/shipPerPage} page={page} defaultPage={1} boundaryCount={2} onChange={handleChange} />
-    </Stack>
-      <SelectAutoWidth
+      <Stack sx={{marginBottom: '40px'}} spacing={2}>
+      <Pagination sx={{backgroundColor: 'white', borderRadius: '100px'}} color="primary" count={Math.ceil(vehicles.length/shipPerPage)} page={page} defaultPage={1} boundaryCount={2} onChange={handleChange} />
+    </Stack >
+      <Filter 
       />
-      
       <div className={style.ships__box}>
         {currentVehicles.map((vehicle) => (
           <Ship key={vehicle.title} vehicle={vehicle} />
