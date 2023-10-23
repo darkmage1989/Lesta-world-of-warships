@@ -3,6 +3,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import { vehicles } from '../../interface';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -36,8 +37,11 @@ function a11yProps(index: number) {
     'aria-controls': `simple-tabpanel-${index}`,
   };
 }
+interface BasicTabsProps {
+  vehicle:vehicles;
+}
 
-export default function BasicTabs() {
+export default function BasicTabs({vehicle}: BasicTabsProps) {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -46,20 +50,25 @@ export default function BasicTabs() {
 
   return (
     <Box sx={{ width: '100%' }}>
-      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+      <Box sx={{ borderBottom: 1, borderColor: 'divider'}}>
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-          <Tab label="Item One" {...a11yProps(0)} />
-          <Tab label="Item Two" {...a11yProps(1)} />
+          <Tab label='Описание' {...a11yProps(0)} />
+          <Tab label='Нация' {...a11yProps(1)} />
+          <Tab label='Уровень' {...a11yProps(2)} />
+          <Tab label='Тип' {...a11yProps(3)} />
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>
-        Item One
+        {vehicle.description}
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
-        Item Two
+      {vehicle.nation.name}
       </CustomTabPanel>
       <CustomTabPanel value={value} index={2}>
-        Item Three
+      {vehicle.level}
+      </CustomTabPanel>
+      <CustomTabPanel value={value} index={3}>
+      {vehicle.type.name}
       </CustomTabPanel>
     </Box>
   );

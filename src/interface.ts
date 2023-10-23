@@ -1,10 +1,10 @@
 export interface vehicles {
     description: string;
-    icons: Array<icons>;
+    icons: icons;
     level: number;
-    nation:Array<nation>;
+    nation:nation;
     title: string;
-    type: Array<type>
+    type: type;
 }
 interface icons {
     large: string;
@@ -12,12 +12,12 @@ interface icons {
 }
 interface nation {
     color: string;
-    icons: Array<icons>;
+    icons: icons;
     name: string;
     title: string;
 }
 interface type {
-    icons: Array<icons>;
+    icons: icons;
     name: string;
     title:string
 

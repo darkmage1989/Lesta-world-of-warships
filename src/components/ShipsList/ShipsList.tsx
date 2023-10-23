@@ -2,6 +2,8 @@ import { useQuery } from "@apollo/client";
 import { SHIPS } from "../../apollo/ships";
 import { LinearProgress } from "@mui/material";
 import Ship from "../Ship/Ship";
+import { vehicles } from "../../interface";
+import style from './ShipsList.module.css'
 const ShipsList = () => {
   const { data, loading, error } = useQuery(SHIPS);
   
@@ -10,16 +12,16 @@ const ShipsList = () => {
     return <LinearProgress />;
   }
   if (isEmptyList) {
-    //обработка пустого списка
-    return <div>пусто</div>;
+    return <div>Кораблей нема</div>;
   }
   if (error) {
     return <div></div>;
   }
-  console.log(data.vehicles);
-  return <div>
-    
-    <Ship/>
+  const vehicles:Array<vehicles> = data.vehicles
+  return <div className={style.ships__box}>
+    {vehicles.map((vehicle)=> (
+      <Ship key={vehicle.title} vehicle={vehicle}/>
+    ))}
   </div>;
 };
 
