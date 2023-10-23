@@ -18,8 +18,16 @@ const shipsDataSlice = createSlice({
       }
       state.isFilteredVehicles = true
       state.filteredVehicles = state.vehicles.filter((vehicle) => vehicle.level === Number(actions.payload))
+    },
+    setFilteredVehiclesByNation: (state, actions) => {
+      if (!actions.payload) {
+        state.isFilteredVehicles = false
+        return
+      }
+      state.isFilteredVehicles = true
+      state.filteredVehicles = state.vehicles.filter((vehicle) => vehicle.nation.name === actions.payload)
     }
   },
 });
-export const { setVehicles, setFilteredVehiclesByLevel } = shipsDataSlice.actions;
+export const { setVehicles, setFilteredVehiclesByLevel, setFilteredVehiclesByNation } = shipsDataSlice.actions;
 export default shipsDataSlice.reducer;

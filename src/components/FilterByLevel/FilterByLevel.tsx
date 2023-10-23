@@ -6,10 +6,10 @@ import {useState} from 'react'
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../redux/store";
 import { setFilteredVehiclesByLevel } from "../../redux/slices/shipsDataSlice";
-export default function Filter() {
+export default function FilterByLevel() {
   const dispatch = useDispatch();
   const [filterByLevel, setFilterByLevel] = useState("");
-  const handleChange = (event: SelectChangeEvent) => {
+  const handleChangeFilteredVehiclesByLevel = (event: SelectChangeEvent) => {
     setFilterByLevel(event.target.value);
     dispatch(setFilteredVehiclesByLevel(event.target.value))
   };
@@ -22,8 +22,6 @@ export default function Filter() {
   shipLevels.sort(function (a, b) {
     return a - b;
   });
-  const shipNations = [];
-  const shipClass = [];
   return (
     <div>
       <FormControl sx={{ m: 1, minWidth: 80, backgroundColor: 'white',borderRadius: '20px', width: '110px'}}>
@@ -32,7 +30,7 @@ export default function Filter() {
           labelId="demo-simple-select-autowidth-label"
           id="demo-simple-select-autowidth"
           value={filterByLevel}
-          onChange={handleChange}
+          onChange={handleChangeFilteredVehiclesByLevel}
           autoWidth
           label="Уровень"
         >
