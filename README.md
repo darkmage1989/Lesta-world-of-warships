@@ -13,4 +13,5 @@ Apollo,
 Доступные скрипты - 
 npm run start 
 npm run build
+
 Перед запуском проекта, необходимо установить зависимости npm i либо npm install
