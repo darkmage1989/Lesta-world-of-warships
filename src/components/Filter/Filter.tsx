@@ -1,17 +1,19 @@
-import * as React from "react";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
-import { vehicles } from "../../interface";
-interface SelectAutoWidthProps {
-  vehicles: Array<vehicles>;
-}
-export default function SelectAutoWidth({ vehicles }: SelectAutoWidthProps) {
-  const [level, setLevel] = React.useState("");
+import {useState} from 'react'
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../../redux/store";
+import { setFilteredVehiclesByLevel } from "../../redux/slices/shipsDataSlice";
+export default function SelectAutoWidth() {
+  const dispatch = useDispatch();
+  const [filterByLevel, setFilterByLevel] = useState("");
   const handleChange = (event: SelectChangeEvent) => {
-    setLevel(event.target.value);
+    setFilterByLevel(event.target.value);
+    dispatch(setFilteredVehiclesByLevel(event.target.value))
   };
+ const vehicles = useSelector((state:RootState) => state.shipsDataSlice.vehicles);
   const shipLevels = vehicles
     .map((vehicle) => vehicle.level)
     .filter(function (item, position, array) {
@@ -29,7 +31,7 @@ export default function SelectAutoWidth({ vehicles }: SelectAutoWidthProps) {
         <Select
           labelId="demo-simple-select-autowidth-label"
           id="demo-simple-select-autowidth"
-          value={level}
+          value={filterByLevel}
           onChange={handleChange}
           autoWidth
           label="Уровень"
@@ -44,6 +46,7 @@ export default function SelectAutoWidth({ vehicles }: SelectAutoWidthProps) {
           ))}
         </Select>
       </FormControl>
+      
     </div>
   );
 }
