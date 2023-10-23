@@ -49,14 +49,14 @@ const ShipsList = () => {
   }
   return (
     <div className={style.shipsList__box}>
-      <Stack sx={{ marginBottom: "40px" }} spacing={2}>
+      <Stack sx={{ marginBottom: "40px" }} spacing={1}>
         <Pagination
-          sx={{ backgroundColor: "white", borderRadius: "100px" }}
+          sx={{ backgroundColor: "white", borderRadius: "100px"}}
           color="primary"
           count={Math.ceil(vehicles.length / shipPerPage)}
           page={page}
           defaultPage={1}
-          boundaryCount={2}
+          boundaryCount={1}
           onChange={handleChange}
         />
       </Stack>
