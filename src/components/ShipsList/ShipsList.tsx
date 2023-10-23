@@ -9,6 +9,7 @@ import { RootState } from "../../redux/store";
 import { useState } from "react";
 import FilterByLevel from "../FilterByLevel/FilterByLevel";
 import FilterByNation from "../FilterByNation/FilterByNation";
+import FilterByShipClass from "../FilterByShipClass/FilterByShipClass";
 
 const ShipsList = () => {
   const { data, loading, error } = useQuery(SHIPS);
@@ -62,6 +63,7 @@ const ShipsList = () => {
       <div className={style.filters__box}>
         <FilterByLevel />
         <FilterByNation />
+        <FilterByShipClass/>
       </div>
 
       <div className={style.ships__box}>
