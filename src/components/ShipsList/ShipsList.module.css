@@ -5,3 +5,9 @@
     justify-content: center;
     margin-top: 100px;
 }
+.shipsList__box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 70px;
+}
