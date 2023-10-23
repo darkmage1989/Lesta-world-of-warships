@@ -1,9 +1,10 @@
 import { useQuery } from "@apollo/client";
 import { SHIPS } from "../../apollo/ships";
 import { LinearProgress } from "@mui/material";
+import Ship from "../Ship/Ship";
 const ShipsList = () => {
   const { data, loading, error } = useQuery(SHIPS);
-  console.log(data);
+  
   const isEmptyList = !loading && !data; // обработка загрузки
   if (loading) {
     return <LinearProgress />;
@@ -15,7 +16,11 @@ const ShipsList = () => {
   if (error) {
     return <div></div>;
   }
-  return <div></div>;
+  console.log(data.vehicles);
+  return <div>
+    
+    <Ship/>
+  </div>;
 };
 
 export default ShipsList;
