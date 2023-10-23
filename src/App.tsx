@@ -1,10 +1,13 @@
-import ShipsList from "./components/ShipsList";
+import Page from "./components/Head/Head";
+import ShipsList from "./components/ShipsList/ShipsList";
 
 function App() {
-  return <main className="App">
-    <h1>Кораблики</h1>
-    <ShipsList/>
-  </main>;
+  return (
+    <main className="App">
+      <Page />
+      <ShipsList />
+    </main>
+  );
 }
 
 export default App;

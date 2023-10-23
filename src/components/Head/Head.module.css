@@ -1,0 +1,21 @@
+.page {
+    background-image: url('https://wows-wowsp-global.gcdn.co/media/ceph-image/1c3aa1f4-9be2-11ed-8258-d89d6715223c.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+.title {
+    background-image: url('https://wows-web-static.wgcdn.co/wowsp/c4018385/browserAssets/02db024a8410d0c4.svg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-top: 100px;
+    height: 220px;
+    width: 700px;
+    margin-bottom: 80px;
+}
