@@ -19,6 +19,7 @@ const ShipsList = () => {
     return <div></div>;
   }
   const vehicles: Array<vehicles> = data.vehicles;
+  console.log(vehicles);
   return (
     <div className={style.shipsList__box}>
       <SelectAutoWidth vehicles={vehicles}/>
