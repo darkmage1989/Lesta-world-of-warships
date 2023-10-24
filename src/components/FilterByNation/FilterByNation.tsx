@@ -9,11 +9,21 @@ import { setFilteredVehiclesByValue } from "../../redux/slices/shipsDataSlice";
 export default function FilterByNation() {
   const dispatch = useDispatch();
   const [filterByNation, setFilterByNation] = useState("");
+  const isFiltered = useSelector(
+    (state: RootState) => state.shipsDataSlice.isFilteredVehicles
+  );
+  const defaultVehicles = useSelector(
+    (state: RootState) => state.shipsDataSlice.vehicles
+  );
+  const filteredVehicles = useSelector(
+    (state: RootState) => state.shipsDataSlice.filteredVehicles
+  );
+  const vehicles = isFiltered ? filteredVehicles : defaultVehicles;
   const handleChangeFilteredVehiclesByNation = (event: SelectChangeEvent) => {
     setFilterByNation(event.target.value);
     dispatch(setFilteredVehiclesByValue({valueFilter: event.target.value, nameFilter: 'byNation'}))
   };
- const vehicles = useSelector((state:RootState) => state.shipsDataSlice.vehicles);
+  
   const shipNation = vehicles
     .map((vehicle) => vehicle.nation.name)
     .filter(function (item, position, array) {

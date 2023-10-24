@@ -9,11 +9,20 @@ import { setFilteredVehiclesByValue } from "../../redux/slices/shipsDataSlice";
 export default function FilterByLevel() {
   const dispatch = useDispatch();
   const [filterByLevel, setFilterByLevel] = useState("");
+  const isFiltered = useSelector(
+    (state: RootState) => state.shipsDataSlice.isFilteredVehicles
+  );
+  const defaultVehicles = useSelector(
+    (state: RootState) => state.shipsDataSlice.vehicles
+  );
+  const filteredVehicles = useSelector(
+    (state: RootState) => state.shipsDataSlice.filteredVehicles
+  );
+  const vehicles = isFiltered ? filteredVehicles : defaultVehicles;
   const handleChangeFilteredVehiclesByLevel = (event: SelectChangeEvent) => {
     setFilterByLevel(event.target.value);
     dispatch(setFilteredVehiclesByValue({valueFilter: event.target.value, nameFilter: 'byLevel'}))
   };
- const vehicles = useSelector((state:RootState) => state.shipsDataSlice.vehicles);
   const shipLevels = vehicles
     .map((vehicle) => vehicle.level)
     .filter(function (item, position, array) {
