@@ -5,13 +5,13 @@ import Select, { SelectChangeEvent } from "@mui/material/Select";
 import {useState} from 'react'
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../redux/store";
-import { setFilteredVehiclesByShipClass } from "../../redux/slices/shipsDataSlice";
+import { setFilteredVehiclesByValue } from "../../redux/slices/shipsDataSlice";
 export default function FilterByShipClass() {
   const dispatch = useDispatch();
   const [filterByShipClass, setFilterByShipClass] = useState("");
   const handleChangeFilteredVehiclesByShipClass = (event: SelectChangeEvent) => {
     setFilterByShipClass(event.target.value);
-    dispatch(setFilteredVehiclesByShipClass(event.target.value))
+    dispatch(setFilteredVehiclesByValue({valueFilter: event.target.value, nameFilter: 'byClassShip'}))
   };
  const vehicles = useSelector((state:RootState) => state.shipsDataSlice.vehicles);
   const shipClass = vehicles

@@ -6,7 +6,7 @@ import {useState} from 'react'
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../redux/store";
 import { setFilteredVehiclesByValue } from "../../redux/slices/shipsDataSlice";
-export default function FilterByLevel() {
+export default function Filters() {
   const dispatch = useDispatch();
   const [filterByLevel, setFilterByLevel] = useState("");
   const handleChangeFilteredVehiclesByLevel = (event: SelectChangeEvent) => {

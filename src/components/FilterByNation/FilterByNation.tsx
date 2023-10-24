@@ -5,13 +5,13 @@ import Select, { SelectChangeEvent } from "@mui/material/Select";
 import {useState} from 'react'
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../redux/store";
-import { setFilteredVehiclesByNation } from "../../redux/slices/shipsDataSlice";
+import { setFilteredVehiclesByValue } from "../../redux/slices/shipsDataSlice";
 export default function FilterByNation() {
   const dispatch = useDispatch();
   const [filterByNation, setFilterByNation] = useState("");
   const handleChangeFilteredVehiclesByNation = (event: SelectChangeEvent) => {
     setFilterByNation(event.target.value);
-    dispatch(setFilteredVehiclesByNation(event.target.value))
+    dispatch(setFilteredVehiclesByValue({valueFilter: event.target.value, nameFilter: 'byNation'}))
   };
  const vehicles = useSelector((state:RootState) => state.shipsDataSlice.vehicles);
   const shipNation = vehicles

@@ -1,41 +1,44 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { vehicles } from "../../interface";
+import { filterByClassShip, filterByLevel, filterByNation } from "../../units/Units";
+
 const shipsDataSlice = createSlice({
   name: "shipsDataSlice",
   initialState: {
     vehicles:[] as Array<vehicles>,
     isFilteredVehicles: false,
-    filteredVehicles: []  as Array<vehicles>
+    filteredVehicles: []  as Array<vehicles>,
+    valuesFilter: {
+      byLevel: '',
+      byNation: '',
+      byClassShip: ''
+    }
   },
   reducers: {
     setVehicles: (state, actions) => {
         state.vehicles = actions.payload; 
     },
-    setFilteredVehiclesByLevel: (state, actions) => {
-      if (!actions.payload) {
+    setFilteredVehiclesByValue: (state, actions) => {
+      state.valuesFilter[actions.payload.nameFilter as keyof typeof state.valuesFilter] = actions.payload.valueFilter
+      state.filteredVehicles = state.vehicles
+
+      if(!state.valuesFilter.byLevel && !state.valuesFilter.byClassShip && !state.valuesFilter.byNation) {
         state.isFilteredVehicles = false
         return
       }
       state.isFilteredVehicles = true
-      state.filteredVehicles = state.vehicles.filter((vehicle) => vehicle.level === Number(actions.payload))
+
+      if(state.valuesFilter.byLevel) {
+        state.filteredVehicles = filterByLevel(state.valuesFilter.byLevel, state.filteredVehicles)
+      }
+      if(state.valuesFilter.byNation) {
+        state.filteredVehicles = filterByNation(state.valuesFilter.byNation, state.filteredVehicles)
+      }
+      if(state.valuesFilter.byClassShip) {
+        state.filteredVehicles = filterByClassShip(state.valuesFilter.byClassShip, state.filteredVehicles)
+      }
     },
-    setFilteredVehiclesByNation: (state, actions) => {
-      if (!actions.payload) {
-        state.isFilteredVehicles = false
-        return
-      }
-      state.isFilteredVehicles = true
-      state.filteredVehicles = state.vehicles.filter((vehicle) => vehicle.nation.name === actions.payload)
-    },
-    setFilteredVehiclesByShipClass: (state, actions) => {
-      if (!actions.payload) {
-        state.isFilteredVehicles = false
-        return
-      }
-      state.isFilteredVehicles = true
-      state.filteredVehicles = state.vehicles.filter((vehicle) => vehicle.type.name === actions.payload)
-    }
   },
 });
-export const { setVehicles, setFilteredVehiclesByLevel, setFilteredVehiclesByNation, setFilteredVehiclesByShipClass} = shipsDataSlice.actions;
+export const { setVehicles, setFilteredVehiclesByValue,} = shipsDataSlice.actions;
 export default shipsDataSlice.reducer;
