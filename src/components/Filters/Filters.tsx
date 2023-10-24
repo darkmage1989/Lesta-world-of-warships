@@ -3,49 +3,26 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "../../redux/store";
+import {  useDispatch } from "react-redux";
 import { setFilteredVehiclesByValue } from "../../redux/slices/shipsDataSlice";
+
 interface FiltersProps {
   name: string;
   byName: string;
+  vehicleFilterData: Array<string>
 }
-export default function Filters({ name, byName }: FiltersProps) {
+export default function Filters({ name, byName, vehicleFilterData}: FiltersProps) {
   const dispatch = useDispatch();
   const [filter, setFilter] = useState("");
-  const isFiltered = useSelector(
-    (state: RootState) => state.shipsDataSlice.isFilteredVehicles
-  );
-  const defaultVehicles = useSelector(
-    (state: RootState) => state.shipsDataSlice.vehicles
-  );
-  const filteredVehicles = useSelector(
-    (state: RootState) => state.shipsDataSlice.filteredVehicles
-  );
-  const vehicles = isFiltered ? filteredVehicles : defaultVehicles;
   const handleChange = (event: SelectChangeEvent) => {
     setFilter(event.target.value);
     dispatch(
       setFilteredVehiclesByValue({
         valueFilter: event.target.value,
-        nameFilter:  byName ,
+        nameFilter: byName,
       })
     );
   };
-  const filterList = vehicles
-    .map((vehicle) => {
-      switch (name) {
-        case "Уровень":
-          return vehicle.level;
-        case "Нация":
-          return vehicle.nation.name;
-        case "Класс":
-          return vehicle.type.name;
-      }
-    })
-    .filter(function (item, position, array) {
-      return array.lastIndexOf(item) === position;
-    });
   return (
     <div>
       <FormControl
@@ -69,7 +46,7 @@ export default function Filters({ name, byName }: FiltersProps) {
           <MenuItem value="">
             <em>None</em>
           </MenuItem>
-          {filterList.map((list) => (
+          {vehicleFilterData.map((list) => (
             <MenuItem key={list} value={list}>
               <em>{list}</em>
             </MenuItem>

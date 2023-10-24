@@ -45,11 +45,12 @@ const ShipsList = () => {
   if (!isFiltered) {
     dispatch(setVehicles(data.vehicles));
   }
+  const vehicleFilterData = vehicles.map((vehicle) => vehicle)
   return (
     <div className={style.shipsList__box}>
       <Stack sx={{ marginBottom: "40px" }} spacing={1}>
         <Pagination
-          sx={{ backgroundColor: "white", borderRadius: "100px"}}
+          sx={{ backgroundColor: "white", borderRadius: "100px" }}
           color="primary"
           count={Math.ceil(vehicles.length / shipPerPage)}
           page={page}
@@ -59,9 +60,27 @@ const ShipsList = () => {
         />
       </Stack>
       <div className={style.filters__box}>
-        <Filters name={'Уровень'} byName={'byLevel'}/>
-        <Filters name={'Нация'} byName={'byNation'}/>
-        <Filters name={'Класс'} byName={'byClassShip'}/>
+        <Filters
+          name={"Уровень"}
+          byName={"byLevel"}
+          vehicleFilterData={vehicleFilterData.map(level => level.level).filter(function (item, position, array) {
+            return array.lastIndexOf(item) === position;
+          })}
+        />
+        <Filters
+          name={"Нация"}
+          byName={"byNation"}
+          vehicleFilterData={vehicleFilterData.map(nation => nation.nation.name).filter(function (item, position, array) {
+            return array.lastIndexOf(item) === position;
+          })}
+        />
+        <Filters
+          name={"Класс"}
+          byName={"byClassShip"}
+          vehicleFilterData={vehicleFilterData.map(type => type.type.name).filter(function (item, position, array) {
+            return array.lastIndexOf(item) === position;
+          })}
+        />
       </div>
 
       <div className={style.ships__box}>
