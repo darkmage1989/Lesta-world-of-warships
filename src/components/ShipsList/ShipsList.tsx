@@ -10,6 +10,7 @@ import { useState } from "react";
 import FilterByLevel from "../FilterByLevel/FilterByLevel";
 import FilterByNation from "../FilterByNation/FilterByNation";
 import FilterByShipClass from "../FilterByShipClass/FilterByShipClass";
+import Filters from "../Filters/Filters";
 
 const ShipsList = () => {
   const { data, loading, error } = useQuery(SHIPS);
@@ -61,9 +62,9 @@ const ShipsList = () => {
         />
       </Stack>
       <div className={style.filters__box}>
-        <FilterByLevel />
-        <FilterByNation />
-        <FilterByShipClass/>
+        <Filters name={'Уровень'} byName={'byLevel'}/>
+        <Filters name={'Нация'} byName={'byNation'}/>
+        <Filters name={'Класс'} byName={'byClassShip'}/>
       </div>
 
       <div className={style.ships__box}>
