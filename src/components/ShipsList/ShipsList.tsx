@@ -7,9 +7,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { setVehicles } from "../../redux/slices/shipsDataSlice";
 import { RootState } from "../../redux/store";
 import { useState } from "react";
-import FilterByLevel from "../FilterByLevel/FilterByLevel";
-import FilterByNation from "../FilterByNation/FilterByNation";
-import FilterByShipClass from "../FilterByShipClass/FilterByShipClass";
 import Filters from "../Filters/Filters";
 
 const ShipsList = () => {
