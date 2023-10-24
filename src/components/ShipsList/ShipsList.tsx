@@ -45,7 +45,22 @@ const ShipsList = () => {
   if (!isFiltered) {
     dispatch(setVehicles(data.vehicles));
   }
-  const vehicleFilterData = vehicles.map((vehicle) => vehicle)
+  const vehicleFilterData = vehicles.map((vehicle) => vehicle);
+  const filterLevelList = vehicleFilterData
+    .map((level) => level.level)
+    .filter(function (item, position, array) {
+      return array.lastIndexOf(item) === position;
+    }).sort((a, b) => +a - +b);
+  const filterNations = vehicleFilterData
+    .map((nation) => nation.nation.name)
+    .filter(function (item, position, array) {
+      return array.lastIndexOf(item) === position;
+    });
+  const filterType = vehicleFilterData
+    .map((type) => type.type.name)
+    .filter(function (item, position, array) {
+      return array.lastIndexOf(item) === position;
+    });
   return (
     <div className={style.shipsList__box}>
       <Stack sx={{ marginBottom: "40px" }} spacing={1}>
@@ -63,23 +78,17 @@ const ShipsList = () => {
         <Filters
           name={"Уровень"}
           byName={"byLevel"}
-          vehicleFilterData={vehicleFilterData.map(level => level.level).filter(function (item, position, array) {
-            return array.lastIndexOf(item) === position;
-          })}
+          vehicleFilterData={filterLevelList}
         />
         <Filters
           name={"Нация"}
           byName={"byNation"}
-          vehicleFilterData={vehicleFilterData.map(nation => nation.nation.name).filter(function (item, position, array) {
-            return array.lastIndexOf(item) === position;
-          })}
+          vehicleFilterData={filterNations}
         />
         <Filters
           name={"Класс"}
           byName={"byClassShip"}
-          vehicleFilterData={vehicleFilterData.map(type => type.type.name).filter(function (item, position, array) {
-            return array.lastIndexOf(item) === position;
-          })}
+          vehicleFilterData={filterType}
         />
       </div>
 
